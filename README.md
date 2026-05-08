@@ -1,0 +1,1 @@
+# WaccApp_Digitalis_Melleklet
