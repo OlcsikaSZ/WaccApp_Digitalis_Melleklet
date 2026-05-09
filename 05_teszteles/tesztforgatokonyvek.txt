@@ -1,0 +1,34 @@
+WaccApp manuális tesztforgatókönyvek
+
+1. Egyedi üzenetküldés
+Cél: annak ellenőrzése, hogy a felhasználó címzett és üzenettartalom megadásával
+küldési műveletet tud indítani.
+Elvárt eredmény: a rendszer sikeres vagy hibás visszajelzést ad.
+
+2. Kötelező mezők ellenőrzése
+Cél: üres címzett vagy üres üzenettartalom esetén a frontend ne indítson hibás kérést.
+Elvárt eredmény: érthető hibaüzenet jelenik meg.
+
+3. Sablonos üzenetküldés
+Cél: sablon kiválasztása, paraméterek megadása, sablonos küldés indítása.
+Elvárt eredmény: a rendszer a sablonos kommunikációt kezeli és visszajelzi az eredményt.
+
+4. Beszélgetésnézet
+Cél: egy kontakt korábbi üzeneteinek megtekintése.
+Elvárt eredmény: a bejövő és kimenő üzenetek időrendben, elkülönítve jelennek meg.
+
+5. Kérdőívszerkesztés
+Cél: kérdések, válaszok és következő lépések rögzítése.
+Elvárt eredmény: a kérdőívlogika menthető, és hibás kapcsolat esetén javítható.
+
+6. Szűrés
+Cél: név, telefonszám, típus, dátumintervallum vagy kérdőív szerinti keresés.
+Elvárt eredmény: az eredménylista a megadott feltételek szerint frissül.
+
+7. Médiafájl kezelése
+Cél: fájl kiválasztása és küldési folyamat indítása.
+Elvárt eredmény: a rendszer jelzi a fájl kiválasztását, a küldés állapotát és az eredményt.
+
+8. Időzített küldés
+Cél: későbbi időpontra rögzített üzenet vagy kérdőív ellenőrzése.
+Elvárt eredmény: az ütemezett művelet menthető és státusza visszakövethető.

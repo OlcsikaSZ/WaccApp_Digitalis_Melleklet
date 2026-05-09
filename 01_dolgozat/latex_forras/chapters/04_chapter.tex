@@ -1,0 +1,139 @@
+\chapter{Projekt-előkészítés és követelmények}
+
+A WaccApp fejlesztését egy gyakorlati kommunikációs igény indította el. A cél egy olyan frontendoldali felület kialakítása volt, amely a WhatsApp Business API-ra épülő üzleti üzenetküldést nem technikai végpontok és háttérfolyamatok szintjén mutatja meg, hanem a felhasználó számára követhető műveletekké alakítja. A projekt előkészítésekor hamar egyértelművé vált, hogy önmagában az üzenetküldés lehetősége nem elég. A rendszernek kezelnie kell az üzenetek előkészítését, a sablonos kommunikációt, a kérdőíves folyamatokat, a médiafájlok továbbítását, az időzített küldéseket és a korábbi kommunikáció visszakeresését is.
+
+A követelmények meghatározásakor ezért nemcsak az volt a kérdés, hogy a rendszer milyen funkciókat tudjon, hanem az is, hogy ezek a funkciók milyen felhasználói folyamatként jelenjenek meg. Egy WhatsApp Business API-ra épülő alkalmazásnál a felhasználó nem közvetlenül az API-val dolgozik. Űrlapokat tölt ki, küldési módot választ, fájlt csatol, kérdőívet állít össze, szűrési feltételeket ad meg, majd visszajelzést vár arról, hogy a művelet sikeres volt-e. Emiatt a projekt előkészítésében a funkcionális igények mellett ugyanolyan fontos szerepet kaptak a használhatósági, validációs, állapotkezelési és adatvédelmi szempontok is.
+
+\section{A projektindítás háttere}
+
+A projektindítás hátterében az a felismerés állt, hogy a vállalati és szolgáltatói kommunikációban egyre nagyobb igény van gyors, közvetlen és részben automatizálható ügyfélkapcsolati megoldásokra. A WhatsApp Business Platform ebből a szempontból megfelelő technológiai alapot ad, mert egy széles körben használt kommunikációs csatornát kapcsol össze üzleti célú üzenetküldési, sablonkezelési és interaktív válaszadási lehetőségekkel. [R1], [R3]
+
+A WaccApp alapgondolata az volt, hogy erre a platformra olyan webes frontend épüljön, amely nemcsak egy üzenet elküldését teszi lehetővé, hanem a kommunikáció teljesebb kezelését is támogatja. A rendszernek alkalmasnak kellett lennie arra, hogy a felhasználó különböző típusú üzeneteket készítsen elő, kérdőíves folyamatokat indítson, médiafájlokat küldjön, időzített műveleteket állítson be, majd a később visszaérkező válaszokat és kommunikációs eseményeket értelmezhető formában át tudja tekinteni.
+
+Az előkészítés során fontos volt a WhatsApp Business Platform sajátosságainak megértése. A sablonos üzenetek, az interaktív gombok, az opt-in alapú kommunikáció és a platform által meghatározott szabályok közvetlenül befolyásolták a frontend tervezését. A felületnek nem szabadott olyan műveleteket sugallnia, amelyek a platform működésével ellentétesek, ugyanakkor a felhasználó számára ezeket a kötöttségeket nem technikai szabályhalmazként, hanem érthető kezelőfelületi működésként kellett megjeleníteni. [R1], [R2], [R3]
+
+A projekt előkészítő szakaszában más üzenetküldő megoldások működési mintái is hasznos összehasonlítási alapot adtak. Ezek vizsgálata nem azért volt fontos, hogy a WaccApp általános chatalkalmazássá váljon, hanem azért, hogy látható legyen, milyen felületi megoldások segítik a gyors használatot, az állapotok követését és a válaszfolyamatok kezelését. A WaccApp végül nem platformfüggetlen üzenetküldő rendszerként, hanem kifejezetten WhatsApp Business API-ra épülő, frontendközpontú kommunikációs felületként formálódott. [R4], [R15], [R16], [R17]
+
+\section{Funkcionális követelmények}
+
+A funkcionális követelmények azt határozták meg, hogy a WaccApp frontendjének milyen műveleteket kell támogatnia. A rendszerrel szemben már az előkészítés során elvárás volt, hogy ne csak egyetlen üzenetküldési feladatot oldjon meg, hanem több egymáshoz kapcsolódó kommunikációs helyzetet kezeljen. Ide tartozott az egyedi üzenetküldés, a sablonos kommunikáció, a kérdőívek szerkesztése és indítása, a fájl- és médiakezelés, az időzített küldés, valamint a korábbi üzenetek és válaszok visszakeresése.
+
+Az egyik alapvető követelmény az volt, hogy a felhasználó egyedi szöveges üzenetet tudjon küldeni megadott címzettre. Ehhez a frontendnek biztosítania kellett a címzett és az üzenettartalom megadását, valamint azt, hogy a küldés előtt a rendszer felismerje az alapvető hiányosságokat. A küldési folyamatnak nem szabadott bizonytalanul lezárulnia: a felületnek jeleznie kellett, ha a művelet elindult, sikerült vagy hibára futott.
+
+A sablonos üzenetküldés külön követelményként jelent meg, mert a WhatsApp Business Platform működésében a sablonoknak kiemelt szerepük van. A frontendnek lehetőséget kellett adnia a sablon kiválasztására, a szükséges paraméterek megadására és annak ellenőrzésére, hogy a küldéshez szükséges adatok rendelkezésre állnak-e. Ez a követelmény azért volt fontos, mert egy hiányos vagy rosszul paraméterezett sablon nem egyszerű felületi hiba, hanem sikertelen kommunikációs művelet forrása lehet. [R1], [R2]
+
+A kommunikációs előzmények visszakövetése szintén alapvető funkcionális igény volt. A korábbi kommunikáció nem maradhatott pusztán háttérben tárolt adat, mert a felhasználónak később is látnia kellett, milyen üzenetek kerültek elküldésre, milyen válaszok érkeztek vissza, és hogyan alakult egy adott kommunikációs folyamat. Ez a követelmény később külön lista- és beszélgetésnézeti megoldások kialakításához vezetett.
+
+A kérdőívkezelés a rendszer egyik legfontosabb funkcionális követelménye lett. A frontendnek támogatnia kellett olyan kérdőívek létrehozását és indítását, amelyekben a válaszok nemcsak rögzített adatok, hanem a következő lépést is meghatározhatják. A rendszernek kezelnie kellett a szöveges vagy számalapú válaszokra épülő kérdőíveket, valamint a sablonos, gombos válaszlogikára épülő folyamatokat is. A követelmény itt nem egyszerű kérdéslista létrehozása volt, hanem olyan szerkeszthető kommunikációs logika támogatása, amely több lépésen keresztül is követhető marad. [R1], [R2], [R3]
+
+A média- és fájlkezelés önálló funkcionális igényként jelent meg. A rendszernek lehetőséget kellett adnia képek és dokumentumok kiválasztására, küldés előtti ellenőrzésére, továbbítására és későbbi visszakövetésére. Frontend szempontból ez azt jelentette, hogy a fájlcsatolás nem lehetett vak művelet. A felhasználónak még a küldés előtt érzékelnie kellett, milyen tartalmat választott ki, a rendszernek pedig kezelnie kellett azokat a helyzeteket, amikor a fájl hiányzik vagy nem megfelelő.
+
+Az időzített küldések támogatása szintén fontos követelmény volt. A WaccApp-nak nemcsak azonnali üzenetküldést kellett lehetővé tennie, hanem olyan műveleteket is, amelyek későbbi időpontra kerülnek rögzítésre. Ez vonatkozhatott szöveges üzenetre, sablonra, kérdőívre vagy médiatartalomra is. Az időzítésnél különösen fontos volt, hogy a rendszer ne csak az időpont megadását engedje, hanem ellenőrizze azt is, hogy a küldéshez szükséges többi adat rendelkezésre áll-e. Egy hiányosan beállított időzített művelet ugyanis sokkal később okozhatna hibát, amikor a felhasználó már nem feltétlenül figyeli aktívan a rendszert.
+
+A szűrés és az egyszerű válaszösszesítés szintén a funkcionális követelmények közé tartozott. A felhasználónak lehetőséget kellett kapnia arra, hogy a korábbi kommunikációs eseményeket és kérdőíves válaszokat több szempont alapján visszakeresse. Ilyen szempont lehet a név, a telefonszám, az üzenettípus, a dátumintervallum, a kérdőív vagy egy adott válasz. Az elvárás nem egy teljes analitikai vagy riportkészítő rendszer kialakítása volt, hanem az, hogy a találatok áttekinthető formában jelenjenek meg, és a kérdőíves válaszok alapvető darabszám szerinti összesítése is elérhető legyen. Ez közvetlenül kapcsolódik ahhoz a feladatkiírási célhoz, hogy a beszélgetések és válaszok vizuális megjelenítése, szűrése és egyszerű értelmezése is része legyen a frontendnek. [R13], [R14]
+
+\section{Nem funkcionális követelmények}
+
+A nem funkcionális követelmények azt határozták meg, hogy a rendszer a fenti funkciókat milyen minőségben valósítsa meg. A WaccApp esetében ezek az elvárások különösen fontosak voltak, mert egy kommunikációs frontend értékét nemcsak az adja, hogy a funkciók léteznek, hanem az is, hogy a felhasználó mennyire tudja azokat biztonságosan, gyorsan és kiszámíthatóan használni.
+
+Az egyik legfontosabb nem funkcionális követelmény a reszponzív működés volt. A felületnek eltérő kijelzőméreteken is használhatónak kellett maradnia, mert a kommunikációs műveletek nem kötődnek kizárólag asztali környezethez. A felhasználónak kisebb kijelzőn is el kellett tudnia indítani egy üzenetet, át kellett tudnia tekinteni egy beszélgetést, és kezelnie kellett az alapvető űrlapokat. Ezért a reszponzivitás nem díszítő vagy utólagos szempontként jelent meg, hanem a mindennapi használhatóság feltételeként. [R9], [R13]
+
+A megbízhatóság és a hibatűrés szintén meghatározó elvárás volt. A rendszernek minden jelentős műveletnél érthető visszajelzést kellett adnia arról, hogy a folyamat elindult-e, sikeresen lezárult-e, vagy hiba történt. A frontendnek már a küldés vagy mentés előtt csökkentenie kellett a nyilvánvaló hibák esélyét. Ilyen lehet a hiányzó címzett, az üres üzenettartalom, a kitöltetlen sablonparaméter, a hibás kérdőívkapcsolat, a nem megfelelő fájl vagy az értelmezhetetlen időzítési adat. [R13], [R14]
+
+A használhatóság szintén önálló minőségi követelményként jelent meg. A WaccApp több eltérő funkciót kezel, ezért fontos volt, hogy a felhasználó ne minden műveletnél teljesen új működési logikával találkozzon. A cél egy olyan rendszer kialakítása volt, amelyben az űrlapok, visszajelzések, hibaüzenetek és fő műveleti elemek következetesen viselkednek. Ez nem azt jelenti, hogy minden nézetnek ugyanúgy kellett kinéznie, hanem azt, hogy a felhasználó hasonló alaplogikát tapasztaljon akkor is, ha éppen üzenetet küld, kérdőívet szerkeszt, fájlt csatol vagy adatokat keres vissza.
+
+Az adatvédelem és a platformszintű megfelelés szintén fontos nem funkcionális elvárás volt. A WaccApp telefonszámokkal, üzenetekkel, kérdőíves válaszokkal és médiatartalmakkal dolgozik, ezért a frontend kialakításánál figyelembe kellett venni az adatminimalizálás, a tájékoztatás és az opt-in alapú üzleti kommunikáció szempontjait. Frontendoldalon ez nem a teljes adatvédelmi felelősség átvételét jelenti, hanem azt, hogy a felület ne kérjen be indokolatlan adatokat, ne jelenítsen meg felesleges információkat, és ne sugalljon olyan kommunikációs lehetőséget, amely a platform szabályaival ellentétes lenne. [R3], [R5]
+
+További elvárásként jelent meg az alapvető hozzáférhetőségi szempontok figyelembevétele. A rendszer nem teljes körű akadálymentesítési projektként készült, ugyanakkor fontos volt, hogy a szövegek olvashatók legyenek, az interaktív elemek megfelelő méretet kapjanak, a fókuszállapotok érzékelhetők maradjanak, és a felület kisebb kijelzőn se váljon nehezen kezelhetővé. Ezek a szempontok közvetlenül befolyásolják, hogy a felhasználó mennyi hibával és bizonytalansággal tudja használni a rendszert. [R6], [R7]
+
+\section{Felhasználói és rendszeroldali elvárások}
+
+A WaccApp frontendjével szemben egyszerre jelentek meg felhasználói és rendszeroldali elvárások. A felhasználó oldaláról az volt a legfontosabb, hogy a rendszer gyorsan tanulható, átlátható és kiszámítható legyen. Egy ilyen kommunikációs felületen a felhasználó nem szeretne technikai részletekkel foglalkozni. Azt kell látnia, hogy milyen adatot kell megadnia, melyik műveletet indítja el, és mi lett az eredmény.
+
+A rendszeroldali elvárások ezzel párhuzamosan a háttérrendszer és a WhatsApp Business Platform működéséből következtek. A frontendnek olyan adatokat kellett továbbítania, amelyeket a backend értelmezni tud, és olyan műveleteket kellett támogatnia, amelyek a platform szabályai szerint is végrehajthatók. A sablonos kommunikáció, a gombos válaszok, a médiafájlok kezelése és az opt-in alapú üzleti üzenetküldés mind olyan terület, ahol a felület nem tervezhető teljesen szabadon. [R1], [R2]
+
+A frontend egyik fő szerepe éppen az volt, hogy ezt a kétféle elvárást összehangolja. A technikai és platformszintű korlátokat nem nyers szabályként kellett megjelenítenie, hanem olyan felhasználói működéssé kellett alakítania, amely természetesnek és érthetőnek hat. Ha egy mező kötelező, ha egy sablonhoz paraméter szükséges, ha egy kérdőívkapcsolat hiányos, vagy ha egy időzített művelet nem menthető, akkor ezt a felületnek időben és értelmezhetően kellett jeleznie.
+
+Ebből következett, hogy a WaccApp frontendje nem lehetett pusztán „kirakat” a backend funkciói előtt. Köztes értelmező rétegként kellett működnie a felhasználói szándék és a háttérrendszer által elvárt adatszerkezet között. A felületnek egyszerre kellett a felhasználó nyelvén beszélnie és a rendszer szabályait követnie. Ez a kettősség később közvetlenül meghatározta a felhasználói élményhez, architektúrához és modulokhoz kapcsolódó döntéseket is. [R1], [R2], [R3]
+
+\section{Fejlesztési célkitűzések}
+
+A WaccApp frontendjének fejlesztési célkitűzései abból indultak ki, hogy a rendszer értéke nem pusztán a funkciók számában mérhető. Legalább ilyen fontos volt, hogy ezek a funkciók átlátható, következetes és a gyakorlatban is használható egységet alkossanak. A sikeres frontendmegvalósítás ezért nem egyetlen technikai cél teljesítését jelentette, hanem több egymással összefüggő szempont megvalósítását.
+
+Az első cél egy stabil, többnézetes frontend kialakítása volt, amelyben a küldés, a kommunikáció visszakövetése, a kérdőívkezelés, a médiafunkciók, az időzítés és az adatszűrés külön felületi feladatként jelennek meg. Ez a cél nem konkrét fájlnevek létrehozását jelentette, hanem olyan szerkezeti gondolkodást, amelyben minden fő feladat saját kezelési logikát kaphat, miközben a rendszer egésze mégsem esik szét különálló részekre.
+
+A második cél a következetes működési logika biztosítása volt. A felhasználónak akkor is hasonló alapmintákkal kellett találkoznia, ha eltérő funkciókat használ. A validáció, a hibajelzés, a betöltési állapotok, a sikeres műveletek visszajelzése és a hibás helyzetek kezelése minden fő folyamatban hasonló szemléletet kellett, hogy kövessen. Ez azért volt fontos, mert a WaccApp többféle feladatot kezel, és a felhasználó csak akkor tudja gyorsan megtanulni a rendszert, ha a visszajelzések és műveleti minták következetesek maradnak.
+
+A harmadik cél a kérdőív- és sablonkezelés frontendoldali támogatása volt. A rendszernek nemcsak azt kellett lehetővé tennie, hogy a felhasználó kérdéseket vagy sablonokat rögzítsen, hanem azt is, hogy ezekből működő kommunikációs folyamat épüljön fel. Különösen fontos volt a válaszokhoz kapcsolódó következő lépések kezelése, mert egy hibás elágazás a teljes kérdőívfolyamat megszakadását okozhatja. Ez a cél a WaccApp egyik legerősebb saját fejlesztési irányát adta.
+
+A negyedik cél az volt, hogy a rendszer támogassa a nem szöveges és nem azonnali kommunikációs helyzeteket is. A médiafájlok kezelése és az időzített küldések bevezetése azért volt fontos, mert a valós üzleti kommunikáció gyakran nem merül ki egy rövid szöveges üzenetben. A frontendnek ezért olyan működést kellett adnia, amelyben a fájlok, képek, sablonok, kérdőívek és időzített műveletek is értelmezhetően kezelhetők.
+
+A fejlesztési célok között végül kiemelt helyet kapott a hibamegelőzés és a világos visszajelzés. A frontendnek már a háttérrendszerrel való kommunikáció előtt segítenie kellett a hibás adatok kiszűrését, majd a szerver válaszát felhasználói szempontból érthető formában kellett megjelenítenie. A sikeres frontendmegvalósítás így nem pusztán esztétikus kezelőfelület létrehozását jelentette, hanem egy olyan használható kommunikációs munkakörnyezet kialakítását, amely ténylegesen támogatja a WhatsApp-alapú folyamatokat.
+
+\section{A követelményekből következő frontendfejlesztési irányok}
+
+A projekt előkészítése kijelölte azokat az irányokat, amelyek mentén a WaccApp frontendje később felépült. A funkcionális követelményekből következett, hogy a rendszernek külön kell kezelnie az üzenetküldést, a kommunikáció visszakövetését, a kérdőíveket, a médiatartalmakat, az időzített műveleteket és az adatok szűrését. A nem funkcionális követelmények pedig azt határozták meg, hogy ezek a funkciók csak akkor tekinthetők megfelelőnek, ha használható, reszponzív, következetes és hibamegelőző felületi működés kapcsolódik hozzájuk.
+
+A követelményekből tehát nem egyszerű funkciólista állt össze, hanem egy frontendfejlesztési irány. A rendszernek úgy kellett támogatnia a WhatsApp Business API-ra épülő kommunikációt, hogy a felhasználó ne technikai műveletek sorozataként, hanem átlátható felületi folyamatként érzékelje azt. Ez a szemlélet vezet át a követelmények és a megvalósítás megfeleltetéséhez, amely összefoglalja, hogy a korábban meghatározott elvárások a WaccApp mely konkrét frontendnézeteiben, moduljaiban és működési döntéseiben jelennek meg. [R1], [R5], [R13], [R14]
+
+\section{A követelmények és a megvalósítás megfeleltetése}
+
+A követelmények meghatározása után fontos áttekinteni, hogy az egyes elvárások a WaccApp frontendjében milyen konkrét nézetekhez, modulokhoz és működési megoldásokhoz kapcsolódnak. Ez a megfeleltetés azért lényeges, mert megmutatja, hogy a rendszer a korábban megfogalmazott funkcionális és nem funkcionális követelmények alapján felépített frontendmegoldásként értelmezhető. A táblázat célja annak bemutatása, hogy a főbb követelmények hogyan jelentek meg a megvalósított rendszerben. A részletes működést a későbbi tervezési, architekturális, modul-, API- és tesztelési fejezetek tárgyalják. Ebben a részben a hangsúly azon van, hogy a fejlesztési célok, a frontendnézetek és a megvalósított működés között látható kapcsolat jöjjön létre.
+
+\begin{table}[H]
+\centering
+\caption{A főbb követelmények és megvalósító frontendnézetek kapcsolata.}
+\label{tab:kovetelmenyek-megvalositas}
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.25\textwidth}|>{\raggedright\arraybackslash}p{0.27\textwidth}|Y|}
+\hline
+\textbf{Követelmény} &
+\textbf{Megvalósító nézet vagy modul} &
+\textbf{Megvalósítás jellege} \\
+\hline
+
+Egyedi szöveges üzenet küldése &
+\path{index.html} &
+Címzett és üzenettartalom megadása, kliensoldali ellenőrzés, küldési művelet indítása. \\
+\hline
+
+Sablonos üzenet küldése &
+\path{index.html}, \path{template.html} &
+Sablon kiválasztása, paraméterek kezelése és sablonos kommunikáció indítása. \\
+\hline
+
+Kérdőív indítása és szerkesztése &
+\path{index.html}, \path{questionnaire.html}, \path{template.html} &
+Szöveges és sablonos kérdőívfolyamatok létrehozása, mentése és indítása. \\
+\hline
+
+Kommunikáció visszakövetése &
+\path{messages.html}, \path{sent-messages.html}, \path{conv.html} &
+Bejövő és kimenő üzenetek listázása, valamint kontaktalapú beszélgetésnézet. \\
+\hline
+
+Szűrés és alapvető összesítés &
+\path{filter.html} &
+Név, telefonszám, típus, dátumintervallum, kérdőív és válasz szerinti keresés. \\
+\hline
+
+Média- és fájlkezelés &
+\path{index.html}, \path{conv.html}, public/uploads, public/sent\_media &
+Fájl kiválasztása, továbbítása és beszélgetésben történő értelmezhető megjelenítése. \\
+\hline
+
+Időzített küldés &
+\path{index.html}, ütemezési végpontok &
+Későbbi időpontra rögzített szöveges, sablonos, kérdőíves vagy médiás műveletek kezelése. \\
+\hline
+
+\end{tabularx}
+\end{table}
+A követelményekhez kapcsolódó részletes manuális tesztforgatókönyvek a mellékletben találhatók. A részletes ellenőrzési szempontokat a \ref{tab:reszletes-manualis-tesztek}. táblázat foglalja össze.
+
+A megfeleltetés alapján látható, hogy a WaccApp fő követelményei konkrét frontendnézetekben és működési döntésekben jelentek meg. Az \path{index.html} a kommunikációs műveletek indítófelületeként működik, a \path{messages.html} és a \path{sent-messages.html} az üzenetek listaalapú áttekintését támogatja, a \path{conv.html} a beszélgetések részletesebb értelmezését biztosítja, a \path{filter.html} a visszakeresést és az egyszerű válaszösszesítést valósítja meg, míg a \path{questionnaire.html} és a \path{template.html} a kérdőíves és sablonos kommunikációs logika kezeléséhez kapcsolódik.
+
+A táblázat azt is mutatja, hogy nem minden követelmény azonos mélységben valósult meg. Az egyedi üzenetküldés, a sablonos küldés, a beszélgetésmegjelenítés, a kérdőívkezelés, a médiaküldés, az időzítés és a szűrés a rendszer működő részei közé tartoznak. Egyes területek ugyanakkor tudatosan egyszerűsített formában készültek el. Ilyen például az alapvető válaszösszesítés, amely a kérdőíves válaszok darabszám szerinti áttekintését támogatja. Hasonlóan, az alapvető hozzáférhetőségi és adminisztratív funkciók is jelen vannak, de ezek további fejlesztése későbbi bővítési irányként értelmezhető.

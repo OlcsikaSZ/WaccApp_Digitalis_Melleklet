@@ -1,0 +1,35 @@
+WaccApp futtatási útmutató
+
+1. Követelmények
+- Node.js telepített környezet
+- npm csomagkezelő
+- SQLite adatbázis támogatás
+- Meta/WhatsApp Business fejlesztői adatok, ha valódi üzenetküldést is tesztelni kell
+
+2. Függőségek telepítése
+Lépj be a 02_forraskod/waccapp mappába, majd futtasd:
+npm install
+
+3. Környezeti változók
+Másold a .env.example fájlt .env néven:
+cp .env.example .env
+
+A .env fájlban a mintaértékeket cseréld saját fejlesztői adatokra.
+Valódi token, jelszó vagy API-kulcs a digitális mellékletben nincs.
+
+4. Tesztadatbázis
+A szakdolgozati melléklethez tartozó mintaadatbázis:
+03_adatbazis/whatsapp_messages_teszt.db
+
+A DB_PATH változóval lehet megadni, hogy az alkalmazás ezt használja.
+
+5. Indítás
+npm start
+
+Alapértelmezett helyi cím:
+http://localhost:3000
+
+6. Fontos megjegyzés
+A melléklet tisztított beadási csomag. A node_modules mappa nincs benne,
+mert az npm install paranccsal újra létrehozható. A valódi .env fájl szintén nincs benne,
+mert érzékeny adatokat tartalmazhat.

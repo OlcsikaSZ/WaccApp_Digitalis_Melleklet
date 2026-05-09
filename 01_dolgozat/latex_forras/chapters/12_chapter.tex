@@ -1,0 +1,31 @@
+\chapter{Összefoglalás}
+
+\section{A dolgozat főbb megállapításai}
+
+A szakdolgozat a WaccApp frontendjének fejlesztésén keresztül azt mutatta be, hogy egy WhatsApp Business API-ra épülő rendszerben a kezelőfelület szerepe jóval több annál, mint hogy néhány űrlapon keresztül elérhetővé tegye az üzenetküldést. A fejlesztés során egyértelművé vált, hogy a felhasználó nem az API működésével, a háttérben futó kérésekkel vagy a sablonok technikai felépítésével szeretne foglalkozni. Számára az a fontos, hogy érthető legyen, mit kell kitöltenie, mikor indíthat el egy műveletet, és kapjon visszajelzést arról, hogy az adott küldés, mentés vagy lekérdezés sikerült-e. 
+
+A WaccApp esetében ezért a frontend nem egyszerű megjelenítő rétegként készült el. A felületnek össze kellett fognia az üzenetküldést, a sablonos kommunikációt, a kérdőívek kezelését, a médiafájlok csatolását, az időzített küldéseket és a korábbi kommunikáció visszakeresését. Ezek külön-külön is kezelhető funkciók, de a gyakorlatban csak akkor használhatók jól, ha a felhasználó számára egy összefüggő munkafolyamat részeként jelennek meg. 
+
+A dolgozat egyik fontos tanulsága az volt, hogy a többnézetes felépítés ebben a projektben indokolt megoldásnak bizonyult. Az \path{index.html} a küldési műveletek kiindulópontja lett, a \path{conv.html} a beszélgetések áttekintését segíti, a filter.html a keresést és a visszakeresést támogatja, míg a \path{questionnaire.html} és a sablonkezelő oldalak a kérdőíves folyamatok előkészítéséhez kapcsolódnak. Ez a felosztás nemcsak fejlesztői szempontból tette átláthatóbbá a rendszert, hanem a felhasználói oldalon is segített abban, hogy az eltérő feladatok ne egyetlen túlzsúfolt képernyőn jelenjenek meg. 
+
+A fejlesztés közben az is láthatóvá vált, hogy egy ilyen rendszer minőségét nem csak a funkciók száma határozza meg. Legalább ennyire fontos, hogy a felület hogyan kezeli a hibákat, hogyan jelzi a folyamatban lévő műveleteket, mennyire következetes a validáció, és kisebb képernyőn is használható marad-e. Egy üzenetküldő rendszerben különösen zavaró lehet, ha a felhasználó nem tudja, hogy egy üzenet valóban elküldésre került-e, vagy csak a felület nem adott visszajelzést. Emiatt az állapotjelzések, a hibakezelés és a visszacsatolások nem kiegészítő részletek voltak, hanem a frontend működésének lényeges elemei. 
+
+\section{A célkitűzések teljesülése}
+
+A dolgozat elején megfogalmazott fő cél teljesült: elkészült egy olyan frontendközpontú webes felület, amely több fontos WhatsApp Business API-ra épülő kommunikációs műveletet képes kezelhető formában támogatni. A rendszerben megvalósult az egyedi szöveges üzenetek és a sablonos üzenetek küldése, a szöveges és gombos logikára épülő kérdőívek szerkesztése és indítása, a médiafájlok csatolása, az időzített küldések beállítása, valamint a kommunikációs események beszélgetésszerű és szűrt visszakeresése. 
+
+A megvalósítás során fontos szempont volt, hogy ezek a funkciók ne egymástól elszigetelt oldalakként jelenjenek meg. A WaccApp nézetei külön feladatokat látnak el, de a felhasználói folyamatok szintjén összekapcsolódnak. Egy kérdőív például nem csak a szerkesztőfelületen létezik: az elkészítés után elindítható, a válaszai megjelennek a kommunikációs előzményekben, majd később visszakereshetők. Hasonló logika érvényesül a médiafájlok és az időzített küldések esetében is, ahol a művelet nem ér véget a beállításnál vagy a küldésnél, hanem később is ellenőrizhető marad. 
+
+A rendszer jelenlegi állapota természetesen nem tekinthető teljes körű vállalati kampánymenedzsment- vagy elemzőplatformnak. Nem ez volt a dolgozat célja. A hangsúly azon volt, hogy a WhatsApp Business API-ra épülő kommunikáció frontendoldali kezelése bemutatható, működő és továbbfejleszthető formában valósuljon meg. Ezt a célt a WaccApp teljesíti: a rendszer alkalmas arra, hogy a fő kommunikációs műveleteket külön nézeteken keresztül, mégis összefüggő felhasználói folyamatként kezelje. 
+
+A célkitűzések teljesülése abban is megjelenik, hogy a dolgozat nemcsak a kész felületet mutatta be, hanem a mögötte álló fejlesztési döntéseket is. Ide tartozik a több HTML-nézet alkalmazása, a kliensoldali validáció szerepe, az API-hívásokhoz kapcsolódó állapotkezelés, a beszélgetésnézet kialakítása, valamint a kérdőíves és sablonos folyamatok elkülönített kezelése. Ezek együtt adják meg azt az alapot, amelyre a rendszer később továbbépíthető. 
+
+\section{Záró gondolatok}
+
+A WaccApp fejlesztése számomra azt mutatta meg, hogy egy kommunikációs rendszer használhatósága nem kizárólag azon múlik, hogy a háttérrendszer technikailag képes-e üzeneteket küldeni. Legalább ennyire fontos, hogy a felhasználó milyen felületen keresztül találkozik ezekkel a lehetőségekkel. Ha a frontend nem ad egyértelmű irányt, nem jelez vissza megfelelően, vagy túl sok különböző funkciót zsúfol egy helyre, akkor a rendszer akkor is nehezen használható lesz, ha a háttérben működő API-kapcsolatok egyébként rendben vannak. 
+
+A projekt során ezért a legnagyobb kihívást nem egyetlen látványos funkció megvalósítása jelentette, hanem az, hogy a különböző kommunikációs műveletek kezelhető szerkezetbe kerüljenek. Az egyszerű üzenetküldés, a sablonküldés, a kérdőívindítás, a médiafájlok kezelése, az időzítés és a visszakeresés más-más felhasználói helyzetet jelent. A WaccApp frontendjének ezeket kellett úgy elkülönítenie, hogy közben mégis egy rendszer részeinek érződjenek. 
+
+A dolgozat alapján a WaccApp egy olyan frontendmegoldásként értékelhető, amely a projekt méretéhez és céljához illeszkedő eszközökkel ad választ egy valós kommunikációs igényre. A többnézetes szerkezet, a kliensoldali validáció, az API-alapú működés, a beszélgetésnézet, a kérdőívszerkesztés, a médiafunkciók és a szűrés együtt egy olyan alapot alkotnak, amely jelenlegi formájában is használható, de később tovább bővíthető. 
+
+A WaccApp legfontosabb eredménye ezért nem pusztán az, hogy több funkció elkészült, hanem az, hogy ezek a funkciók egy átgondolt frontendstruktúrába kerültek. A rendszer megmutatja, hogy a jól szervezett frontend nem csak kiszolgálja a háttérrendszert, hanem érthetőbbé és kezelhetőbbé is teszi azt. Ez különösen fontos egy olyan alkalmazásnál, ahol a technikai háttér összetett, a felhasználó viszont egy világos, egyszerűen követhető munkafelületet vár. 

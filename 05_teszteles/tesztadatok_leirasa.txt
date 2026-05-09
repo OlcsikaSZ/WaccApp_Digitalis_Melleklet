@@ -1,0 +1,13 @@
+Tesztadatok leírása
+
+A digitális mellékletben található whatsapp_messages_teszt.db nem éles adatbázis.
+A benne szereplő telefonszámok, e-mail címek, üzenetazonosítók és felhasználók mintaadatok.
+
+A tesztadatbázis célja:
+- üzenetlista megjelenítésének ellenőrzése,
+- beszélgetésnézet alapvető kipróbálása,
+- kérdőíves válaszok és szűrési feltételek bemutatása,
+- időzített üzenet állapotának példaszerű megjelenítése.
+
+A mintaadatok nem tartalmaznak valós ügyfélkommunikációt, valódi jelszót,
+valódi WhatsApp hozzáférési tokent vagy személyes ügyféladatot.

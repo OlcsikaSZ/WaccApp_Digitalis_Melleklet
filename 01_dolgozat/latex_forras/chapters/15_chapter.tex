@@ -1,0 +1,371 @@
+\chapter{Mellékletek}
+A mellékletek a WaccApp frontendjének gyakorlati megvalósítását kiegészítő anyagokat tartalmazzák. A fejezetben szereplő mappaszerkezet, API-végpont-kivonat, manuális tesztforgatókönyvek, kérdőív-adatszerkezeti példa és képernyőképes nézetbemutatások célja az, hogy a dolgozat törzsszövegében bemutatott frontendműködés konkrét projektállományokhoz és ellenőrizhető felületi megoldásokhoz kapcsolódjon.
+
+\section{A WaccApp frontend mappaszerkezete}
+A melléklet a WaccApp projekt frontend szempontból lényeges állományait foglalja össze. A teljes forráskód a digitális mellékletben szerepel.
+\begin{CodeBlock}
+webhook-main/
+|-- app.js
+|-- questionnaire.js
+|-- whatsapp_messages.db
+|-- package.json
+|-- kerdoivek/
+|   |-- olvasas.json
+|   `-- orvosi.json
+`-- public/
+    |-- index.html
+    |-- conv.html
+    |-- filter.html
+    |-- messages.html
+    |-- sent-messages.html
+    |-- questionnaire.html
+    |-- template.html
+    |-- template-menu.html
+    |-- template-single.html
+    |-- login.html
+    |-- menu.html
+    |-- admin.html
+    |-- account.html
+    |-- privacy.html
+    |-- send.html
+    |-- questionnaires.json
+    |-- uploads/
+    `-- sent_media/
+\end{CodeBlock}
+
+\section{Frontend szempontból fontos API-végpontok kivonata}
+
+A következő táblázat a WaccApp fontosabb API-végpontokat foglalja össze. A cél bemutatni a fő frontendnézetek milyen kapcsolódási pontokon keresztül kommunikálnak a háttérrendszerrel.
+
+\begin{table}[H]
+\centering
+\caption{Frontend szempontból fontos API-végpontok kivonata.}
+\label{tab:melleklet-api-vegpontok}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.25}
+
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.23\textwidth}|>{\raggedright\arraybackslash}p{0.12\textwidth}|>{\raggedright\arraybackslash}p{0.25\textwidth}|Y|}
+\hline
+\textbf{Végpont} &
+\textbf{Módszer} &
+\textbf{Kapcsolódó frontend nézet} &
+\textbf{Frontend szerep} \\
+\hline
+
+\path{/send-message} &
+POST &
+\path{index.html} &
+Egyedi szöveges üzenet küldése. \\
+\hline
+
+\path{/send-template} &
+POST &
+\path{index.html}, \path{template.html} &
+Sablonos üzenet küldése. \\
+\hline
+
+\path{/send-file-message} &
+POST &
+\path{index.html} &
+Média- vagy fájlcsatolmány küldése. \\
+\hline
+
+\path{/schedule} &
+POST &
+\path{index.html} &
+Időzített szöveges, sablonos vagy kérdőíves küldés. \\
+\hline
+
+\path{/schedule-media} &
+POST &
+\path{index.html} &
+Időzített médiaküldés. \\
+\hline
+
+\path{/messages} &
+GET &
+\path{messages.html}, \path{conv.html} &
+Beérkező vagy tárolt üzenetek lekérése. \\
+\hline
+
+\path{/sent-messages} &
+GET &
+\path{sent-messages.html}, \path{conv.html} &
+Elküldött üzenetek lekérése. \\
+\hline
+
+\path{/contacts} &
+GET &
+\path{conv.html}, \path{filter.html} &
+Kontaktok, név--telefonszám kapcsolat kezelése. \\
+\hline
+
+\path{/all-questionnaires} &
+GET &
+\path{index.html}, \path{questionnaire.html} &
+Kérdőívek listázása. \\
+\hline
+
+\path{/save-to-questionnaire} &
+POST &
+\path{questionnaire.html}, \path{template.html} &
+Kérdőívlogika mentése. \\
+\hline
+
+\end{tabularx}
+\end{table}
+
+\section{Manuális tesztforgatókönyvek}
+
+A mellékletben szereplő tesztforgatókönyvek a főszövegben bemutatott tesztelési szempontrendszer részletesebb bontását adják. A cél az volt, hogy a WaccApp legfontosabb frontendfolyamatai konkrét bemenetekkel, lépésekkel, elvárt eredményekkel és tényleges tapasztalatokkal is ellenőrizhetők legyenek.
+
+\clearpage
+\begingroup
+\pagestyle{fancy}
+\begin{landscape}
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.18}
+\begin{longtable}{|
+>{\raggedright\arraybackslash}p{0.050\linewidth}|
+>{\raggedright\arraybackslash}p{0.125\linewidth}|
+>{\raggedright\arraybackslash}p{0.145\linewidth}|
+>{\raggedright\arraybackslash}p{0.160\linewidth}|
+>{\raggedright\arraybackslash}p{0.170\linewidth}|
+>{\raggedright\arraybackslash}p{0.170\linewidth}|
+>{\raggedright\arraybackslash}p{0.055\linewidth}|}
+\caption{Részletes manuális tesztforgatókönyvek.}
+\label{tab:reszletes-manualis-tesztek}\\
+\hline
+\textbf{Azon.} &
+\textbf{Tesztelt folyamat} &
+\textbf{Kiindulási állapot} &
+\textbf{Bemenet vagy művelet} &
+\textbf{Elvárt eredmény} &
+\textbf{Tényleges eredmény} &
+\textbf{Státusz} \\
+\hline
+\endfirsthead
+
+\multicolumn{7}{c}{\tablename\ \thetable{} -- folytatás az előző oldalról} \\
+\hline
+\textbf{ID} &
+\textbf{Tesztelt folyamat} &
+\textbf{Kiindulási állapot} &
+\textbf{Bemenet vagy művelet} &
+\textbf{Elvárt eredmény} &
+\textbf{Tényleges eredmény} &
+\textbf{Státusz} \\
+\hline
+\endhead
+
+\hline
+\multicolumn{7}{r}{Folytatás a következő oldalon} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+T1 &
+Egyedi szöveges üzenet küldése &
+Az \path{index.html} oldal elérhető, a backend fut &
+Érvényes telefonszám és nem üres üzenetszöveg megadása, majd küldés indítása &
+A rendszer elküldi az üzenetet, sikeres visszajelzést ad, és az üzenet később visszakereshető &
+A küldés lefutott, a felület sikeres állapotot jelzett, az üzenet megjelent az elküldött tételek között &
+Megfelelt \\
+\hline
+
+T2 &
+Üres üzenet kezelése &
+Az \path{index.html} oldalon címzett megadható &
+Telefonszám megadása után az üzenetmező üresen hagyása &
+A frontend ne indítsa el a küldést, hanem jelezze a hiányzó üzenettartalmat &
+A küldés nem indult el, a felület hibajelzést adott &
+Megfelelt \\
+\hline
+
+T3 &
+Hibás telefonszám kezelése &
+Az \path{index.html} oldalon a küldési űrlap elérhető &
+Hibás formátumú telefonszám megadása &
+A frontend jelezze, hogy a telefonszám nem megfelelő formátumú &
+A felület hibát jelzett, a küldés nem indult el &
+Megfelelt \\
+\hline
+
+T4 &
+Sablonos üzenet küldése &
+Elérhető legalább egy sablon &
+Sablon kiválasztása, szükséges paraméterek kitöltése, küldés indítása &
+A rendszer a kiválasztott sablon alapján elindítja a küldést, majd visszajelzést ad &
+A sablonos küldés elindult, a felület visszajelzést adott &
+Megfelelt \\
+\hline
+
+T5 &
+Hiányzó sablonparaméter kezelése &
+Sablonküldési felület megnyitva &
+Sablon kiválasztása, de kötelező paraméter üresen hagyása &
+A frontend jelezze, hogy a sablonos küldéshez hiányzik adat &
+A küldés nem indult el, a felület hibás állapotot jelenített meg &
+Megfelelt \\
+\hline
+
+T6 &
+Kérdőív létrehozása &
+A \path{questionnaire.html} oldal elérhető &
+Kérdés, válaszlehetőségek és következő lépések megadása &
+A kérdőív menthető legyen, és később indítható formában rendelkezésre álljon &
+A kérdőív szerkezete menthető volt, a folyamat később kiválasztható maradt &
+Megfelelt \\
+\hline
+
+T7 &
+Válaszfüggő kérdőívútvonal ellenőrzése &
+Létező kérdőív indítható &
+Eltérő válaszok kipróbálása egy kérdőívfolyamatban &
+A megadott válasz alapján a megfelelő következő kérdés következzen &
+A kérdőív a megadott válaszlogika szerint haladt tovább &
+Megfelelt \\
+\hline
+
+T8 &
+Beérkező üzenetek listázása &
+Léteznek beérkezett üzenetek &
+\path{messages.html} megnyitása &
+A beérkező üzenetek listaalapú formában jelenjenek meg &
+A beérkezett kommunikációs események megjelentek a nézetben &
+Megfelelt \\
+\hline
+
+T9 &
+Elküldött üzenetek listázása &
+Léteznek elküldött üzenetek &
+\path{sent-messages.html} megnyitása &
+Az elküldött tételek időponttal és tartalommal áttekinthetők legyenek &
+Az elküldött üzenetek listában megjelentek &
+Megfelelt \\
+\hline
+
+T10 &
+Beszélgetésnézet ellenőrzése &
+Léteznek beérkező és elküldött üzenetek ugyanahhoz a kontakthoz &
+\path{conv.html} megnyitása adott kontakt alapján &
+A rendszer időrendi, chat-szerű formában jelenítse meg a kommunikációt &
+A beérkező és kimenő üzenetek elkülönítve, beszélgetésként jelentek meg &
+Megfelelt \\
+\hline
+
+T11 &
+Médiatartalom megjelenítése beszélgetésben &
+Korábban elküldött kép vagy dokumentum rendelkezésre áll &
+\path{conv.html} megnyitása az adott kommunikációs előzménnyel &
+A kép vizuálisan, a dokumentum megnyitható hivatkozásként jelenjen meg &
+A médiatartalom a beszélgetési kontextusban értelmezhetően megjelent &
+Megfelelt \\
+\hline
+
+T12 &
+Név és telefonszám szinkronizálása szűrésnél &
+A \path{filter.html} oldalon vannak ismert kontaktok &
+Név kiválasztása a szűrőmezőben &
+A kapcsolódó telefonszám automatikusan igazodjon a kiválasztott névhez &
+A név és telefonszám mezők szinkronban működtek &
+Megfelelt \\
+\hline
+
+T13 &
+Dátumintervallum szerinti szűrés &
+Léteznek különböző időpontú kommunikációs események &
+Kezdő- és záródátum megadása &
+Csak az adott időszakba eső találatok jelenjenek meg &
+A találati lista az időszak szerint szűkült &
+Megfelelt \\
+\hline
+
+T14 &
+Kérdőíves válaszösszesítés &
+Létezik kérdőíves kommunikáció és válaszadat &
+Kérdőív és kérdés kiválasztása a \path{filter.html} oldalon &
+A felület darabszám szerint jelenítse meg az ismert válaszokat és az „Egyéb” kategóriát &
+A válaszok összesítése megjelent, a nem ismert válaszok külön kategóriába kerültek &
+Megfelelt \\
+\hline
+
+T15 &
+Időzített küldés rögzítése &
+Az \path{index.html} oldalon az időzítési mező elérhető &
+Érvényes címzett, tartalom és jövőbeli időpont megadása &
+A rendszer rögzítse az időzített műveletet, és erről visszajelzést adjon &
+Az időzített művelet rögzítése után a felület visszajelzést adott &
+Megfelelt \\
+\hline
+
+T16 &
+Hibás időzítési adat kezelése &
+Időzített küldési folyamat indítható &
+Hiányzó vagy múltbeli időpont megadása &
+A frontend jelezze, hogy az időzítés nem megfelelő &
+A művelet nem indult el, a felület javítandó hibát jelzett &
+Megfelelt \\
+\hline
+
+T17 &
+Reszponzív megjelenés ellenőrzése &
+A fő nézetek elérhetők &
+\path{index.html}, \path{conv.html}, \path{filter.html} és kérdőívszerkesztő oldalak megnyitása kisebb kijelzőn &
+A fő műveletek kezelhetők, az üzenetek olvashatók, az űrlapok követhetők maradjanak &
+A fő nézetek használhatók maradtak, kisebb finomítási lehetőségekkel &
+Megfelelt \\
+\hline
+
+T18 &
+Regressziós ellenőrzés módosítás után &
+Egy korábbi funkció módosítása megtörtént &
+Kapcsolódó funkciók újbóli kipróbálása, például kérdőívindítás, beszélgetésnézet és szűrés &
+A módosítás ne rontsa el a kapcsolódó működéseket &
+A kapcsolódó folyamatok továbbra is használhatók maradtak &
+Megfelelt \\
+
+\end{longtable}
+\end{landscape}
+\endgroup
+\clearpage
+\pagestyle{fancy}
+
+A részletes tesztforgatókönyvek alapján látható, hogy az ellenőrzés nemcsak az egyes oldalak megnyitására irányult, hanem a WaccApp fő frontendfolyamatainak gyakorlati kipróbálására is. A tesztek között szerepeltek sikeres műveletek, hibás adatbeviteli helyzetek, visszakeresési folyamatok, kérdőíves útvonalak, médiamegjelenítés, időzítés és reszponzív használat is. Ez azért fontos, mert a rendszer használhatósága azon múlik, hogy ezek a folyamatok együtt is követhető és javítható működést adnak.
+
+\section{Példa kérdőív-adatszerkezet}
+
+A WaccApp kérdőíves működésének egyik fontos sajátossága, hogy a kérdések nem egyszerű lineáris sorrendben követik egymást, hanem a válaszokhoz kapcsolódó következő lépések alapján. Az alábbi egyszerűsített példa azt mutatja be, hogyan jelenhet meg egy válaszfüggő kérdőívlogika adatszerkezeti formában.
+
+\begin{CodeBlock}
+const questionnaires = {
+    kiszallitas: {
+        kerdoiv1: {
+            next: {
+                'Igen': 'kerdoiv2',
+                'Nem': 'kerdoiv2'
+            }
+        },
+        kerdoiv2: {
+            next: {
+                'Igen': 'kerdoiv3',
+                'Nem': 'kerdoiv3'
+            }
+        },
+        kerdoiv3: {
+            next: {
+                'Megtartom': null,
+                'Nem tartom meg': 'csomag_gond'
+            }
+        },
+        csomag_gond: {
+            next: null
+        }
+    }
+};
+\end{CodeBlock}
+
+A példában a kiszallitas nevű kérdőív több egymáshoz kapcsolódó lépésből áll. A next objektum azt határozza meg, hogy egy adott válasz után melyik következő kérdés vagy állapot következzen. A null érték a folyamat lezárását jelzi. A teljes kérdőívlogika a digitális mellékletben található forráskódban szerepel.

@@ -1,0 +1,39 @@
+WaccApp felhasználói útmutató
+
+A WaccApp webes felülete a WhatsApp Business API-ra épülő kommunikációs folyamatokat
+teszi kezelhetővé. A rendszer főbb nézetei:
+
+index.html
+Központi üzenetküldő felület. Itt indítható egyedi szöveges üzenet, sablonos üzenet,
+kérdőív, médiafájl küldése és időzített küldés.
+
+conv.html
+Kontaktalapú beszélgetésnézet. A korábbi bejövő és kimenő üzenetek időrendben,
+chat-szerű formában jelennek meg.
+
+messages.html
+Beérkezett üzenetek listanézete.
+
+sent-messages.html
+Elküldött üzenetek listanézete.
+
+filter.html
+Szűrési és alapvető válaszösszesítési felület. A felhasználó név, telefonszám,
+üzenettípus, dátumintervallum, kérdőív vagy válasz alapján kereshet.
+
+questionnaire.html
+Szöveges vagy számalapú válaszlogikára épülő kérdőívek szerkesztésére szolgál.
+
+template.html, template-menu.html, template-single.html
+Sablonos, gombos WhatsApp-kompatibilis kérdőívek és sablonfolyamatok kezelésére
+szolgáló felületek.
+
+admin.html, account.html, login.html
+Belépési, fiókkezelési és adminisztratív funkciók.
+
+privacy.html
+Adatvédelmi tájékoztató nézet.
+
+A rendszer használatakor a felület visszajelzést ad a sikeres és hibás műveletekről.
+A kötelező mezők hiánya, a hibás címzett, a hiányzó fájl vagy a hiányos kérdőívlogika
+kliensoldalon is jelezhető.
