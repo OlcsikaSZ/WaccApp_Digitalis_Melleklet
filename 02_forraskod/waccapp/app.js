@@ -275,7 +275,7 @@ app.use('/kerdoivek',  express.static(path.join(__dirname, 'kerdoivek')));
 
 const port = process.env.PORT || 3000;
 
-const dbPath = path.resolve(__dirname, 'whatsapp_messages.db');
+const dbPath = path.resolve(__dirname, process.env.DB_PATH || 'whatsapp_messages.db');
 const questionnairesDir = path.join(__dirname, 'kerdoivek');
 if (!fs.existsSync(questionnairesDir)) {
     fs.mkdirSync(questionnairesDir);
